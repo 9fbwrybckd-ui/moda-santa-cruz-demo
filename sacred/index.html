@@ -22,32 +22,38 @@
   }
   * { box-sizing: border-box; }
   html { scroll-padding-top: 60px; -webkit-tap-highlight-color: transparent; }
-  body { margin: 0; background: var(--bg); color: var(--cream); font: 16px/1.5 "DM Sans", system-ui, sans-serif; }
+  body { margin: 0; background: var(--bg); color: var(--cream); font: 16px/1.5 "DM Sans", system-ui, sans-serif; overflow-x: clip; }
+  /* Grano de papel, sin pedir archivos */
+  body::after { content: ""; position: fixed; inset: 0; z-index: 9; pointer-events: none; opacity: .08; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   ::selection { background: var(--red); color: #fff; }
   :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
   button { font: inherit; color: inherit; cursor: pointer; }
-  .caps { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .01em; }
 
-  .demo { background: var(--red); color: #fff; text-align: center; font-size: 12px; padding: 6px 12px; }
+  .demo { background: var(--cream); color: var(--bg); text-align: center; font-size: 12px; padding: 6px 12px; }
 
-  .hero { position: relative; height: 82svh; min-height: 460px; max-height: 760px; background: var(--card); overflow: hidden; }
+  /* Portada tipo afiche de drop */
+  .hero { position: relative; height: 86svh; min-height: 500px; max-height: 800px; background: var(--card); overflow: hidden; }
   .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(#0f0e0d66, transparent 22%, transparent 32%, #0f0e0dd9 62%, #0f0e0d 92%); }
-  .hero-txt { position: absolute; left: 16px; right: 16px; bottom: 28px; z-index: 1; max-width: 1100px; margin: 0 auto; }
-  .drop { color: var(--red); font: 500 13px Oswald, sans-serif; letter-spacing: .25em; text-transform: uppercase; }
-  .hero h1 { font: 700 clamp(64px, 22vw, 168px)/.85 Oswald, sans-serif; text-transform: uppercase; letter-spacing: -.01em; margin: 6px 0 12px; }
-  .hero h1 sup { font-size: .32em; vertical-align: .9em; margin-left: .04em; }
-  .hero p { margin: 0; max-width: 30ch; color: var(--cream); font-size: 17px; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(#0f0e0dcc, transparent 38%, transparent 48%, #0f0e0de6 78%, #0f0e0d 96%); }
+  .hero-txt { position: absolute; left: 16px; right: 16px; top: 16px; bottom: 24px; z-index: 2; display: flex; flex-direction: column; max-width: 1100px; margin: 0 auto; }
+  .poster-top { display: flex; justify-content: space-between; font: 500 12px Oswald, sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+  .poster-top .vivo { color: var(--red); }
+  .hero h1 { font: 700 clamp(80px, 26vw, 240px)/.78 Oswald, sans-serif; text-transform: uppercase; margin: 14px -.04em 0; }
+  .hero h1 sup { display: inline-grid; place-items: center; font-size: .2em; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--red); color: var(--cream); vertical-align: 2.4em; rotate: 12deg; margin-left: .05em; }
+  .hero-pie { margin-top: auto; }
+  .hero p { margin: 0; max-width: 30ch; font-size: 17px; }
+  .ndrop { position: absolute; right: -.06em; bottom: -.2em; z-index: 1; font: 700 min(62vw, 520px)/.8 Oswald, sans-serif; color: transparent; -webkit-text-stroke: 1.5px #f2efe855; pointer-events: none; }
   .ver { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; min-height: 48px; padding: 0 22px; background: var(--cream); color: var(--bg); text-decoration: none; font: 700 15px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; border-radius: 4px; transition: scale .16s var(--ease-out); }
   .ver:active { scale: .97; }
 
-  .cinta { overflow: hidden; border-block: 1px solid var(--line); padding: 12px 0; white-space: nowrap; }
-  .cinta div { display: inline-flex; gap: 32px; padding-right: 32px; font: 500 14px Oswald, sans-serif; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
-  .cinta b { color: var(--red); font-weight: 500; }
-  @media (prefers-reduced-motion: no-preference) { .cinta div { animation: cinta 22s linear infinite; } }
+  /* Cinta roja inclinada */
+  .cinta { position: relative; z-index: 3; overflow: hidden; white-space: nowrap; background: var(--red); padding: 10px 0; rotate: -1.5deg; margin: -14px -8px 10px; }
+  .cinta div { display: inline-flex; gap: 28px; padding-right: 28px; font: 700 20px Oswald, sans-serif; letter-spacing: .04em; text-transform: uppercase; color: #fff; }
+  .cinta b { color: var(--bg); }
+  @media (prefers-reduced-motion: no-preference) { .cinta div { animation: cinta 24s linear infinite; } }
   @keyframes cinta { to { translate: -100%; } }
 
-  nav { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; gap: 22px; overflow-x: auto; padding: 0 16px; min-height: 56px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  nav { position: sticky; top: 0; z-index: 4; background: var(--bg); display: flex; gap: 22px; overflow-x: auto; padding: 0 16px; min-height: 56px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
   nav button { border: 0; background: none; padding: 0; min-height: 56px; color: var(--muted); font: 500 15px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; box-shadow: inset 0 -2px transparent; transition: color .15s, box-shadow .15s; }
   nav button[aria-pressed="true"] { color: var(--cream); box-shadow: inset 0 -2px var(--red); }
 
@@ -55,40 +61,56 @@
   .titulo h2 { font: 700 34px/1 Oswald, sans-serif; text-transform: uppercase; margin: 0; }
   .titulo span { color: var(--muted); font-size: 13px; }
 
-  main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 10px; padding: 20px 12px 64px; max-width: 1100px; margin: 0 auto; }
-  @media (min-width: 700px) { main { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 40px 20px; padding-inline: 16px; } }
+  main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px 10px; padding: 20px 12px 64px; max-width: 1100px; margin: 0 auto; }
+  @media (min-width: 700px) { main { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 44px 20px; padding-inline: 16px; } }
   article { display: flex; flex-direction: column; gap: 6px; }
-  .img { position: relative; aspect-ratio: 4/5; background: var(--card); border-radius: 4px; overflow: hidden; }
+  main .big { grid-column: 1 / -1; }
+  @media (min-width: 700px) { main .big { grid-column: span 2; } }
+  .big h3 { font-size: 34px; }
+  .img { position: relative; aspect-ratio: 4/5; background: var(--card); overflow: hidden; }
   .img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .3s ease-out; }
   .img img:not([data-l]) { opacity: 0; }
-  .tag { position: absolute; left: 8px; top: 8px; background: var(--cream); color: var(--bg); font: 500 12px Oswald, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
-  .tag.red { background: var(--red); color: #fff; }
+  .tag { position: absolute; left: 8px; top: 10px; background: var(--cream); color: var(--bg); font: 700 12px Oswald, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; rotate: -4deg; box-shadow: 2px 2px 0 var(--bg); }
+  .tag.red { background: var(--red); color: #fff; rotate: 3deg; }
   .agotado .img img[data-l] { filter: grayscale(1); opacity: .35; }
   .agotado .tag { background: var(--line); color: var(--cream); }
-  h3 { font: 500 16px/1.2 Oswald, sans-serif; text-transform: uppercase; letter-spacing: .02em; margin: 6px 0 0; }
-  .precio { font-weight: 700; font-variant-numeric: tabular-nums; }
-  .tallas { display: flex; gap: 4px; flex-wrap: wrap; }
+  .meta { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 8px; margin-top: 4px; font: 500 11px Oswald, sans-serif; letter-spacing: .14em; color: var(--muted); }
+  .meta .precio { font: 700 15px "DM Sans"; color: var(--cream); letter-spacing: 0; font-variant-numeric: tabular-nums; }
+  h3 { font: 700 19px/1 Oswald, sans-serif; text-transform: uppercase; margin: 0; }
+  .tallas { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
   .tallas input { position: absolute; opacity: 0; pointer-events: none; }
   .tallas span { display: grid; place-items: center; min-width: 40px; height: 40px; padding: 0 8px; font-size: 13px; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; }
   .tallas input:checked + span { background: var(--cream); color: var(--bg); border-color: var(--cream); }
   .tallas input:disabled + span { color: #5c5852; text-decoration: line-through; cursor: not-allowed; }
   .tallas input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
   .quedan { min-height: 18px; font-size: 12px; color: var(--red); }
-  .add { min-height: 44px; border: 1px solid var(--cream); background: none; border-radius: 4px; font: 500 14px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  .acciones { display: flex; gap: 6px; }
+  .add { flex: 1; min-height: 44px; border: 1px solid var(--cream); background: none; border-radius: 4px; font: 500 14px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
   .add.ok { background: var(--cream); color: var(--bg); }
+  .compartir { width: 44px; min-height: 44px; border: 1px solid var(--line); background: none; border-radius: 4px; display: grid; place-items: center; }
+  .compartir svg { width: 18px; height: 18px; }
   .avisar { min-height: 44px; display: grid; place-items: center; font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; text-decoration: none; }
+  .avisar.abre { color: #fff; border-color: var(--red); background: #e63b2e22; }
   .estado { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 16px; }
 
+  /* Lookbook en blanco y negro */
+  .look { max-width: 1100px; margin: 0 auto; padding-bottom: 64px; }
+  .look h2 { font: 700 34px Oswald, sans-serif; text-transform: uppercase; margin: 0 16px 12px; }
+  #lookbook { display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 16px; scrollbar-width: none; }
+  #lookbook a { flex: 0 0 78%; max-width: 420px; aspect-ratio: 3/4; scroll-snap-align: start; position: relative; overflow: hidden; background: var(--card); }
+  #lookbook img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.15); }
+  #lookbook span { position: absolute; left: 10px; bottom: 4px; font: 700 64px/1 Oswald, sans-serif; color: var(--cream); }
+
   .pasos { max-width: 1100px; margin: 0 auto; padding: 8px 16px 64px; }
-  .pasos h2 { font: 700 34px/1 Oswald, sans-serif; text-transform: uppercase; margin: 0 0 16px; }
-  .pasos ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pasos h2 { font: 700 34px/1 Oswald, sans-serif; text-transform: uppercase; margin: 0 0 8px; }
+  .pasos ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
   @media (min-width: 700px) { .pasos ol { grid-template-columns: repeat(4, 1fr); } }
-  .pasos li { background: var(--card); border-radius: 8px; padding: 16px; }
-  .pasos b { display: block; color: var(--red); font: 700 28px Oswald, sans-serif; }
-  .pasos strong { display: block; font: 500 18px Oswald, sans-serif; text-transform: uppercase; margin: 4px 0; }
+  .pasos li { border-top: 1px solid var(--line); padding: 14px 0; }
+  .pasos b { display: block; font: 700 56px/.9 Oswald, sans-serif; color: transparent; -webkit-text-stroke: 1px var(--red); }
+  .pasos strong { display: block; font: 500 18px Oswald, sans-serif; text-transform: uppercase; margin: 6px 0 2px; }
   .pasos p { margin: 0; color: var(--muted); font-size: 14px; }
 
-  #barra { position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 3; max-width: 520px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--red); color: #fff; border: 0; padding: 14px 18px; border-radius: 4px; font: 500 16px Oswald, sans-serif; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 8px 24px #0008;
+  #barra { position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 8; max-width: 520px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--red); color: #fff; border: 0; padding: 14px 18px; border-radius: 4px; font: 500 16px Oswald, sans-serif; letter-spacing: .06em; box-shadow: 0 8px 24px #0008;
     visibility: hidden; opacity: 0; transition: opacity .2s, visibility 0s .2s, scale .16s var(--ease-out); }
   #barra.on { visibility: visible; opacity: 1; transition-delay: 0s; }
   #barra span { display: inline-block; }
@@ -101,21 +123,36 @@
   dialog h4 { font: 700 26px Oswald, sans-serif; text-transform: uppercase; margin: 0 0 4px; }
   .paso { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
   .item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-  .item img { width: 48px; height: 60px; object-fit: cover; border-radius: 2px; background: var(--line); }
-  .item span { flex: 1; }
-  .item button { border: 0; background: none; min-width: 44px; min-height: 44px; font-size: 20px; color: var(--muted); }
+  .item img { width: 48px; height: 60px; object-fit: cover; background: var(--line); }
+  .item > span { flex: 1; }
+  .cant { display: flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; }
+  .cant button { width: 36px; height: 36px; border: 1px solid var(--line); background: none; border-radius: 4px; font-size: 18px; }
   .total { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; }
   .total span:last-child { font: 700 28px Oswald, sans-serif; }
   .btn { width: 100%; min-height: 52px; border: 0; border-radius: 4px; background: var(--cream); color: var(--bg); font: 700 16px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
   .btn.wa { background: var(--wa); color: #fff; }
   .sec { width: 100%; min-height: 44px; margin-top: 4px; border: 0; background: none; color: var(--muted); }
-  .qr { display: grid; place-items: center; gap: 8px; background: var(--cream); color: var(--bg); border-radius: 8px; padding: 18px; margin-bottom: 12px; text-align: center; font-size: 13px; }
-  .qr svg { width: 180px; height: 180px; }
+  .datos { display: grid; gap: 8px; margin: 0 0 12px; }
+  .datos input:not([type=radio]), .datos select { width: 100%; min-height: 48px; padding: 0 12px; font: inherit; font-size: 16px; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--cream); }
+  .entrega { display: flex; gap: 8px; }
+  .entrega label { flex: 1; }
+  .entrega input { position: absolute; opacity: 0; }
+  .entrega span { display: grid; place-items: center; min-height: 44px; border: 1px solid var(--line); border-radius: 4px; font-size: 14px; cursor: pointer; }
+  .entrega input:checked + span { border-color: var(--cream); background: var(--cream); color: var(--bg); }
+  .entrega input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
+  /* Comprobante con bordes perforados */
+  .qr { display: grid; justify-items: center; gap: 10px; background: var(--cream); color: var(--bg); padding: 22px 18px; margin-bottom: 12px; text-align: center; font-size: 13px;
+    --perf: radial-gradient(circle at 8px 0, #0000 5px, #000 5.5px) top/16px 51% repeat-x, radial-gradient(circle at 8px 100%, #0000 5px, #000 5.5px) bottom/16px 51% repeat-x;
+    -webkit-mask: var(--perf); mask: var(--perf); }
+  .qr-top { display: flex; justify-content: space-between; width: 100%; border-bottom: 1px dashed #0f0e0d40; padding-bottom: 10px; font: 500 12px Oswald, sans-serif; letter-spacing: .15em; }
+  .qr svg { width: 168px; height: 168px; }
+  #total2 { font: 700 40px/1 Oswald, sans-serif; }
+  .qr small { color: #0f0e0d99; }
   .nota { font-size: 13px; color: var(--muted); text-align: center; margin: 10px 0 0; }
 
-  .add, .btn, .sec, nav button, .item button, .tallas span { transition: scale .16s var(--ease-out), background-color .15s, color .15s, border-color .15s; }
-  .add:active, .btn:active, #barra:active { scale: .97; }
-  .tallas label:active span, .item button:active { scale: .92; }
+  .add, .btn, .sec, nav button, .item button, .tallas span, .compartir { transition: scale .16s var(--ease-out), background-color .15s, color .15s, border-color .15s; }
+  .add:active, .btn:active, #barra:active, .compartir:active { scale: .97; }
+  .tallas label:active span, .cant button:active { scale: .92; }
   @media (prefers-reduced-motion: no-preference) {
     #barra { translate: 0 calc(100% + 24px); transition-property: opacity, translate, visibility, scale; transition-duration: .2s, .2s, 0s, .16s; }
     #barra.on { translate: 0; transition-duration: .2s, .42s, 0s, .16s; transition-timing-function: ease, var(--spring), linear, var(--ease-out); }
@@ -124,26 +161,28 @@
     @starting-style { dialog[open] { translate: 0 100%; } }
   }
 
-  footer { border-top: 1px solid var(--line); padding: 48px 16px 140px; color: var(--muted); font-size: 14px; }
+  footer { border-top: 1px solid var(--line); padding: 40px 16px 140px; color: var(--muted); font-size: 14px; overflow: hidden; }
   footer p { max-width: 1100px; margin: 0 auto 12px; }
   footer a { color: var(--cream); text-underline-offset: 3px; }
-  .pie { font: 700 56px/1 Oswald, sans-serif; color: var(--cream); text-transform: uppercase; }
+  footer .pie { font: 700 24vw/.8 Oswald, sans-serif; color: var(--cream); text-transform: uppercase; letter-spacing: -.02em; margin: 0 -.03em 24px; max-width: none; }
+  .firma { display: flex; justify-content: space-between; gap: 8px; border-block: 1px solid var(--line); padding: 10px 0; font: 500 11px Oswald, sans-serif; letter-spacing: .15em; text-transform: uppercase; max-width: 1100px; margin: 0 auto 16px; }
 </style>
 </head>
 <body>
 <div class="demo">Demo de tienda para SACRED® · fotos y stock de ejemplo</div>
 <header class="hero" id="hero">
   <div class="hero-txt">
-    <div class="drop" id="drop"></div>
+    <div class="poster-top"><span id="drop"></span><span class="vivo" id="vivo"></span></div>
     <h1 id="nombre"></h1>
-    <p id="lema"></p>
-    <a class="ver" href="#tienda">Ver el drop →</a>
+    <div class="hero-pie"><p id="lema"></p><a class="ver" href="#tienda">Ver el drop →</a></div>
   </div>
+  <span class="ndrop" id="ndrop" aria-hidden="true"></span>
 </header>
 <div class="cinta" aria-hidden="true"><div id="cinta"></div><div id="cinta2"></div></div>
 <div class="titulo" id="tienda"><h2 id="tdrop"></h2><span id="cuenta"></span></div>
 <nav id="filtros" aria-label="Categorías"></nav>
 <main id="catalogo" aria-live="polite"></main>
+<section class="look" aria-label="Lookbook"><h2>Lookbook</h2><div id="lookbook"></div></section>
 <section class="pasos">
   <h2>Cómo comprar</h2>
   <ol>
@@ -161,16 +200,29 @@
     <h4 id="tbolsa">Tu bolsa</h4>
     <p class="paso">Paso 1 de 2 · revisá tu pedido</p>
     <div id="items"></div>
-    <div class="total"><span>Total</span><span id="total"></span></div>
-    <button class="btn" type="button" id="apagar">Pagar con QR</button>
+    <div class="total"><span>Subtotal</span><span id="total"></span></div>
+    <button class="btn" type="button" id="apagar">Continuar al pago</button>
   </div>
   <div id="paso2" hidden>
     <h4>Pagá con QR</h4>
-    <p class="paso">Paso 2 de 2 · escaneá desde la app de tu banco</p>
+    <p class="paso">Paso 2 de 2 · tus datos y el pago</p>
+    <form id="datos" class="datos" onsubmit="return false">
+      <input id="cnombre" required placeholder="Tu nombre" autocomplete="name" aria-label="Tu nombre">
+      <div class="entrega" role="radiogroup" aria-label="Entrega">
+        <label><input type="radio" name="entrega" value="envio" checked><span>Envío</span></label>
+        <label><input type="radio" name="entrega" value="recojo"><span>Recojo en Santa Cruz</span></label>
+      </div>
+      <select id="cciudad" aria-label="Ciudad"><option value="">¿A qué ciudad?</option></select>
+      <p id="envio" class="nota" style="margin:0"></p>
+    </form>
     <div class="qr">
+      <div class="qr-top"><b>SACRED®</b><span id="ref"></span></div>
       <svg viewBox="0 0 21 21" shape-rendering="crispEdges" aria-hidden="true" id="qrsvg"></svg>
-      <div><b id="total2"></b><br>QR de ejemplo · aquí va el QR de SACRED</div>
+      <b id="total2"></b>
+      <div>Cobra: SACRED · Bolivia<br>Escaneá con la app de cualquier banco</div>
+      <small>QR de ejemplo · en la tienda real va el QR de SACRED</small>
     </div>
+    <button class="sec" type="button" id="copiar">Copiar monto</button>
     <button class="btn wa" type="button" id="enviar">Ya pagué · enviar pedido</button>
     <p class="nota">Se abre WhatsApp con tu pedido. Adjuntá la captura del comprobante.</p>
     <button class="sec" type="button" id="volver">← Volver a la bolsa</button>
@@ -183,10 +235,13 @@
   const TIENDA = {
     nombre: "SACRED",
     drop: "Drop 03",
+    fecha: "02.11.26",
     lema: "Exclusivo. Cada drop a la venta en todo Bolivia, con el pedido directo a WhatsApp.",
     whatsapp: "12516430051",          // con código de país, ej. 59170000000
     instagram: "bol.sacred",
-    cinta: ["Envíos a todo Bolivia", "Pago con QR", "Pedido a WhatsApp", "Stock limitado"],
+    cinta: ["Envíos a todo Bolivia", "Pago con QR", "Pedido a WhatsApp", "Unidades limitadas"],
+    // Ciudad: [costo de envío en Bs, tiempo de llegada]
+    envios: { "Santa Cruz": [15, "24 h"], "La Paz": [35, "2–3 días"], "Cochabamba": [30, "2 días"], "Otra ciudad": [40, "3–4 días por flota"] },
     hoja: "",                         // enlace CSV publicado de Google Sheets; vacío = productos.csv
   };
 
@@ -194,7 +249,8 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const wa = txt => `https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(txt)}`;
   const quieto = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const CAMPOS = ["nombre", "categoria", "precio", "stock", "foto", "nuevo"];
+  const nroDrop = () => (TIENDA.drop.match(/\d+/) || [""])[0];
+  const CAMPOS = ["nombre", "categoria", "precio", "stock", "foto", "nuevo", "abre"];
 
   // ponytail: parser CSV mínimo, suficiente para lo que exporta Google Sheets
   function parseCSV(text) {
@@ -239,6 +295,8 @@
         foto: /^https?:\/\//i.test(p.foto) ? p.foto : "",
         ok: hay > 0,
         nuevo: esNuevo(p.nuevo),
+        // "2026-11-07 20:00" en hora de Bolivia; vacío = a la venta ya
+        abre: +new Date(p.abre.replace(" ", "T") + ":00-04:00") || 0,
       };
     }).sort((a, b) => b.ok - a.ok);
   }
@@ -253,25 +311,33 @@
       sizes="${sizes}" width="400" height="500" alt="${esc(alt)}" ${carga} decoding="async" onload="this.dataset.l=1" onerror="this.remove()">`;
   }
 
-  let productos = [], filtro = "Todo", bolsa = [];
+  let productos = [], filtro = "Todo", bolsa = [], ref = "";
   const enBolsa = (nombre, talla) => bolsa.filter(b => b.nombre === nombre && b.talla === talla).length;
+  const cerrado = p => p.abre > Date.now();
+  const cuando = p => new Date(p.abre).toLocaleString("es-BO", { weekday: "short", hour: "2-digit", minute: "2-digit" });
 
   function pintarTienda() {
     $("nombre").innerHTML = `${esc(TIENDA.nombre)}<sup>®</sup>`;
-    $("drop").textContent = `${TIENDA.drop} · disponible ahora`;
     $("lema").textContent = TIENDA.lema;
     $("tdrop").textContent = TIENDA.drop;
-    const c = TIENDA.cinta.map(t => `<span>${esc(t)}</span><b>✦</b>`).join("");
+    $("ndrop").textContent = nroDrop();
+    const c = [`${TIENDA.drop} — ${TIENDA.fecha}`, ...TIENDA.cinta].map(t => `<span>${esc(t)}</span><b>®</b>`).join("");
     $("cinta").innerHTML = c; $("cinta2").innerHTML = c;
+    $("cciudad").innerHTML += Object.keys(TIENDA.envios).map(c => `<option>${esc(c)}</option>`).join("");
     $("pie").innerHTML = `<p class="pie">${esc(TIENDA.nombre)}®</p>
-      <p>Envíos a todo Bolivia · Pago con QR</p>
-      <p><a href="https://instagram.com/${esc(TIENDA.instagram)}" target="_blank" rel="noopener">Instagram @${esc(TIENDA.instagram)}</a> · <a href="${wa("Hola SACRED!")}" target="_blank" rel="noopener">WhatsApp</a></p>`;
+      <div class="firma"><span>Exclusivo.</span><span>${esc(TIENDA.drop)} — ${esc(TIENDA.fecha)}</span><span>Hecho en Bolivia</span></div>
+      <p><a href="https://instagram.com/${esc(TIENDA.instagram)}" target="_blank" rel="noopener">Instagram @${esc(TIENDA.instagram)}</a> · <a href="${wa("Hola SACRED!")}" target="_blank" rel="noopener">WhatsApp</a></p>
+      <p>© ${new Date().getFullYear()} ${esc(TIENDA.nombre)}®</p>`;
   }
 
   function pintarHero() {
-    const p = productos.find(p => p.nuevo && p.ok && p.foto) || productos.find(p => p.foto);
+    // La primera prenda ya sale en grande en la grilla: la portada usa otra
+    const p = productos.find((p, i) => i > 0 && p.nuevo && p.foto) || productos.find(p => p.foto);
     $("hero").querySelector("img")?.remove();
     if (p) $("hero").insertAdjacentHTML("afterbegin", img(p.foto, 0, "", 900, "100vw").replace(' onload="this.dataset.l=1"', ""));
+    $("lookbook").innerHTML = productos.filter(p => p.foto).slice(0, 6).map((p, k) =>
+      `<a href="#p${productos.indexOf(p)}">${img(p.foto, 9, p.nombre, 600, "80vw")}<span>${String(k + 1).padStart(2, "0")}</span></a>`).join("");
+    $("lookbook").querySelectorAll("a").forEach(a => a.onclick = () => { if (filtro !== "Todo") { filtro = "Todo"; pintarFiltros(); pintar(); } });
   }
 
   function pintarFiltros() {
@@ -289,28 +355,41 @@
     });
   }
 
+  const ICONO_COMPARTIR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></svg>';
+
   function pintar() {
     const lista = productos.map((p, i) => [p, i]).filter(([p]) => filtro === "Todo" || p.categoria === filtro);
-    $("cuenta").textContent = `${productos.filter(p => p.ok).length} prendas disponibles`;
+    const total = String(productos.length).padStart(3, "0");
+    $("cuenta").textContent = `${productos.filter(p => p.ok && !cerrado(p)).length} prendas disponibles`;
     $("catalogo").innerHTML = lista.map(([p, i], n) => {
-      const tag = !p.ok ? '<span class="tag">Agotado</span>'
+      const big = n === 0 && filtro === "Todo";
+      const tag = cerrado(p) ? `<span class="tag red">Abre ${esc(cuando(p))}</span>`
+        : !p.ok ? '<span class="tag">Agotado</span>'
         : p.hay <= 3 ? '<span class="tag red">Últimas unidades</span>'
         : p.nuevo ? '<span class="tag">Nuevo</span>' : "";
-      return `
-      <article id="p${i}" class="${p.ok ? "" : "agotado"}">
-        <div class="img">${tag}${img(p.foto, n, p.nombre)}</div>
-        <h3>${esc(p.nombre)}</h3>
-        ${p.precio ? `<div class="precio">Bs ${esc(p.precio)}</div>` : ""}
-        ${p.ok ? `
+      const accion = cerrado(p)
+        ? `<a class="avisar abre" href="${wa(`Hola SACRED! Avisame cuando abra el ${TIENDA.drop}, quiero ${p.nombre}`)}" target="_blank" rel="noopener">Avisame cuando abra</a>`
+        : p.ok ? `
           <div class="tallas" role="radiogroup" aria-label="Talla de ${esc(p.nombre)}">${p.stock.map(s =>
             `<label><input type="radio" name="t${i}" value="${esc(s.t)}" ${s.n > 0 ? "" : "disabled"}><span>${esc(s.t)}</span></label>`).join("")}</div>
           <div class="quedan" aria-live="polite"></div>
-          <button class="add" type="button" data-i="${i}">Agregar a la bolsa</button>`
-        : `<a class="avisar" href="${wa(`Hola SACRED! ¿Me avisan si vuelve ${p.nombre}?`)}" target="_blank" rel="noopener">Avisame si vuelve</a>`}
+          <div class="acciones"><button class="add" type="button" data-i="${i}">Agregar a la bolsa</button>
+            <button class="compartir" type="button" data-i="${i}" aria-label="Compartir ${esc(p.nombre)}">${ICONO_COMPARTIR}</button></div>`
+        : `<a class="avisar" href="${wa(`Hola SACRED! ¿Me avisan si vuelve ${p.nombre}?`)}" target="_blank" rel="noopener">Avisame si vuelve</a>`;
+      return `
+      <article id="p${i}" class="${p.ok ? "" : "agotado"}${big ? " big" : ""}">
+        <div class="img">${tag}${img(p.foto, n, p.nombre, big ? 800 : 400, big ? "(min-width:700px) 540px, 100vw" : undefined)}</div>
+        <div class="meta"><span>N°${String(i + 1).padStart(3, "0")}/${total}</span>${p.precio ? `<span class="precio">Bs ${esc(p.precio)}</span>` : ""}</div>
+        <h3>${esc(p.nombre)}</h3>
+        ${accion}
       </article>`;
     }).join("") || `<p class="estado">No hay prendas en esta categoría.</p>`;
     $("catalogo").querySelectorAll(".add").forEach(b => b.onclick = () => agregar(b));
     $("catalogo").querySelectorAll(".tallas input").forEach(r => r.onchange = () => avisoStock(r));
+    $("catalogo").querySelectorAll(".compartir").forEach(b => b.onclick = () => {
+      const p = productos[b.dataset.i], url = location.href.split("#")[0] + "#p" + b.dataset.i, txt = `${p.nombre} · Bs ${p.precio} en ${TIENDA.nombre}®`;
+      navigator.share ? navigator.share({ title: txt, url }).catch(() => {}) : open(`https://wa.me/?text=${encodeURIComponent(txt + " " + url)}`, "_blank", "noopener");
+    });
   }
 
   function avisoStock(r) {
@@ -342,22 +421,37 @@
   const num = s => parseFloat(String(s).replace(/\./g, "").replace(",", ".")) || 0;
   const total = () => bolsa.reduce((s, p) => s + num(p.precio), 0);
   const bs = n => `Bs ${n.toLocaleString("es-BO")}`;
+  const grupos = () => [...new Map(bolsa.map(b => [b.nombre + "|" + b.talla, b])).values()];
+  const recojo = () => $("datos").entrega.value === "recojo";
+  const envio = () => recojo() ? 0 : TIENDA.envios[$("cciudad").value]?.[0] || 0;
 
   function pintarBolsa() {
     const n = bolsa.length;
     $("barra").classList.toggle("on", n > 0);
-    $("barra").innerHTML = `<span>Tu bolsa (${n})</span><span>${bs(total())}</span>`;
-    $("items").innerHTML = bolsa.map((p, i) => `<div class="item">${img(p.foto, 9, "", 120, "48px")}
-      <span>${esc(p.nombre)} · ${esc(p.talla)}<br><b>Bs ${esc(p.precio)}</b></span>
-      <button type="button" aria-label="Quitar ${esc(p.nombre)}" data-i="${i}">×</button></div>`).join("");
+    $("barra").innerHTML = `<span>TU BOLSA (${n})</span><span>${bs(total())}</span>`;
+    $("items").innerHTML = grupos().map((p, i) => `<div class="item">${img(p.foto, 9, "", 120, "48px")}
+      <span>${esc(p.nombre)} · ${esc(p.talla)}<br><b>${bs(num(p.precio) * enBolsa(p.nombre, p.talla))}</b></span>
+      <span class="cant"><button type="button" data-g="${i}" data-d="-1" aria-label="Uno menos">−</button><span>${enBolsa(p.nombre, p.talla)}</span><button type="button" data-g="${i}" data-d="1" aria-label="Uno más">+</button></span></div>`).join("");
     $("items").querySelectorAll("button").forEach(b => b.onclick = () => {
-      navigator.vibrate?.(10); bolsa.splice(b.dataset.i, 1); pintarBolsa();
+      const g = grupos()[b.dataset.g], max = productos.find(x => x.nombre === g.nombre)?.stock.find(s => s.t === g.talla)?.n || 0;
+      if (b.dataset.d > 0) { if (enBolsa(g.nombre, g.talla) < max) bolsa.push({ ...g }); }
+      else bolsa.splice(bolsa.indexOf(g), 1);
+      navigator.vibrate?.(10); pintarBolsa(); pintar();
       if (!bolsa.length) $("bolsa").close();
     });
-    $("total").textContent = $("total2").textContent = bs(total());
+    $("total").textContent = bs(total());
+    pintarEnvio();
+    try { localStorage.setItem("bolsa-sacred", JSON.stringify(bolsa)); } catch {}
   }
 
-  // ponytail: QR decorativo de ejemplo (patrón fijo), en la tienda real va la imagen del QR del banco de SACRED
+  function pintarEnvio() {
+    const e = TIENDA.envios[$("cciudad").value];
+    $("cciudad").hidden = recojo(); $("cciudad").required = !recojo();
+    $("envio").textContent = recojo() ? "Recojo gratis en Santa Cruz" : e ? `Envío ${bs(e[0])} · llega en ${e[1]}` : "";
+    $("total2").textContent = bs(total() + envio());
+  }
+
+  // ponytail: QR decorativo de ejemplo (patrón fijo); en la tienda real va la imagen del QR del banco de SACRED
   (() => {
     let r = ""; const m = (x, y) => r += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
     const ojo = (ox, oy) => { for (let y = 0; y < 7; y++) for (let x = 0; x < 7; x++) if (x % 6 === 0 || y % 6 === 0 || (x > 1 && x < 5 && y > 1 && y < 5)) m(ox + x, oy + y); };
@@ -368,14 +462,33 @@
 
   const paso = n => { $("paso1").hidden = n !== 1; $("paso2").hidden = n !== 2; };
   $("barra").onclick = () => { paso(1); $("bolsa").showModal(); };
-  $("apagar").onclick = () => paso(2);
+  $("apagar").onclick = () => {
+    ref = `SCRD-${nroDrop()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    $("ref").textContent = ref; $("copiar").textContent = "Copiar monto";
+    paso(2); pintarEnvio();
+  };
+  $("datos").onchange = pintarEnvio;
   $("volver").onclick = () => paso(1);
   $("cerrar").onclick = () => $("bolsa").close();
   $("bolsa").onclick = e => { if (e.target === $("bolsa")) $("bolsa").close(); };
+  $("copiar").onclick = async () => { try { await navigator.clipboard.writeText(String(total() + envio())); $("copiar").textContent = "✓ Monto copiado"; } catch {} };
   $("enviar").onclick = () => {
-    const lineas = bolsa.map(p => `• ${p.nombre} — talla ${p.talla} — Bs ${p.precio}`).join("\n");
-    window.open(wa(`Hola SACRED! Quiero este pedido del ${TIENDA.drop}:\n${lineas}\nTotal: ${bs(total())}\nYa pagué con QR, te mando el comprobante.`), "_blank", "noopener");
+    if (!$("datos").reportValidity()) return;
+    const lineas = grupos().map(p => `• ${enBolsa(p.nombre, p.talla)}× ${p.nombre} — talla ${p.talla} — ${bs(num(p.precio) * enBolsa(p.nombre, p.talla))}`).join("\n");
+    const entrega = recojo() ? "Recojo en Santa Cruz" : `Envío a ${$("cciudad").value}: ${bs(envio())}`;
+    window.open(wa(`Hola SACRED! Pedido ${ref} · ${TIENDA.drop}\n${lineas}\n${entrega}\nTotal: ${bs(total() + envio())}\nA nombre de: ${$("cnombre").value.trim()}\nYa pagué con QR, te mando el comprobante.`), "_blank", "noopener");
   };
+
+  // Cuenta regresiva del drop; para mostrarla en una demo: ?abre=30 bloquea lo nuevo por 30 segundos
+  let cerrados = -1;
+  function reloj() {
+    const fut = productos.filter(cerrado);
+    if (fut.length !== cerrados) { cerrados = fut.length; pintar(); }
+    $("drop").textContent = `${TIENDA.drop} — ${TIENDA.fecha}`;
+    if (!fut.length) return $("vivo").textContent = "● En venta";
+    const ms = Math.min(...fut.map(p => p.abre)) - Date.now(), d = n => String(n).padStart(2, "0");
+    $("vivo").textContent = `Abre en ${Math.floor(ms / 36e5)}h ${d(Math.floor(ms / 6e4) % 60)}m ${d(Math.floor(ms / 1e3) % 60)}s`;
+  }
 
   async function cargar(url) {
     const r = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) });
@@ -392,7 +505,13 @@
     $("catalogo").innerHTML = Array(6).fill('<article><div class="img"></div></article>').join("");
     try { productos = await cargar(TIENDA.hoja || "productos.csv"); }
     catch { try { productos = await cargar("productos.csv"); } catch { productos = []; } }
-    pintarHero(); pintarFiltros(); pintar();
+    const q = new URLSearchParams(location.search).get("abre");
+    if (q) productos.forEach(p => p.nuevo && (p.abre = Date.now() + q * 1000));
+    // La bolsa sobrevive si recargás, solo con lo que sigue en stock
+    try { bolsa = JSON.parse(localStorage.getItem("bolsa-sacred") || "[]").filter(b => productos.some(p => p.nombre === b.nombre && p.stock.some(s => s.t === b.talla && s.n > 0))); } catch {}
+    pintarHero(); pintarFiltros(); pintar(); pintarBolsa(); reloj();
+    setInterval(reloj, 1000);
+    if (location.hash) $(location.hash.slice(1))?.scrollIntoView();
     if (!productos.length) $("catalogo").innerHTML = `<p class="estado">No pudimos cargar el drop. <a href="${wa("Hola SACRED! Quiero ver el drop")}" style="color:var(--red)">Escribinos por WhatsApp</a></p>`;
   })();
 </script>
