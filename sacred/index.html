@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SACRED® · Drop 03</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Demo de tienda online para SACRED®: drops, stock por talla, pago con QR y pedido a WhatsApp.">
+<meta name="theme-color" content="#0f0e0d">
+<meta property="og:title" content="SACRED® · Drop 03">
+<meta property="og:description" content="Elegí tu talla, pagá con QR y tu pedido llega a WhatsApp.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&w=1200&q=70">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0e0d; --card: #1a1918; --line: #2c2a28; --cream: #f2efe8; --muted: #a39d94;
+    --red: #e63b2e; --wa: #167a42;
+    --ease-out: cubic-bezier(.23,1,.32,1); --ease-drawer: cubic-bezier(.32,.72,0,1); --spring: cubic-bezier(.34,1.35,.64,1);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: 60px; -webkit-tap-highlight-color: transparent; }
+  body { margin: 0; background: var(--bg); color: var(--cream); font: 16px/1.5 "DM Sans", system-ui, sans-serif; }
+  ::selection { background: var(--red); color: #fff; }
+  :focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  .caps { font-family: Oswald, sans-serif; text-transform: uppercase; letter-spacing: .01em; }
+
+  .demo { background: var(--red); color: #fff; text-align: center; font-size: 12px; padding: 6px 12px; }
+
+  .hero { position: relative; height: 82svh; min-height: 460px; max-height: 760px; background: var(--card); overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(#0f0e0d66, transparent 22%, transparent 32%, #0f0e0dd9 62%, #0f0e0d 92%); }
+  .hero-txt { position: absolute; left: 16px; right: 16px; bottom: 28px; z-index: 1; max-width: 1100px; margin: 0 auto; }
+  .drop { color: var(--red); font: 500 13px Oswald, sans-serif; letter-spacing: .25em; text-transform: uppercase; }
+  .hero h1 { font: 700 clamp(64px, 22vw, 168px)/.85 Oswald, sans-serif; text-transform: uppercase; letter-spacing: -.01em; margin: 6px 0 12px; }
+  .hero h1 sup { font-size: .32em; vertical-align: .9em; margin-left: .04em; }
+  .hero p { margin: 0; max-width: 30ch; color: var(--cream); font-size: 17px; }
+  .ver { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; min-height: 48px; padding: 0 22px; background: var(--cream); color: var(--bg); text-decoration: none; font: 700 15px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; border-radius: 4px; transition: scale .16s var(--ease-out); }
+  .ver:active { scale: .97; }
+
+  .cinta { overflow: hidden; border-block: 1px solid var(--line); padding: 12px 0; white-space: nowrap; }
+  .cinta div { display: inline-flex; gap: 32px; padding-right: 32px; font: 500 14px Oswald, sans-serif; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+  .cinta b { color: var(--red); font-weight: 500; }
+  @media (prefers-reduced-motion: no-preference) { .cinta div { animation: cinta 22s linear infinite; } }
+  @keyframes cinta { to { translate: -100%; } }
+
+  nav { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; gap: 22px; overflow-x: auto; padding: 0 16px; min-height: 56px; max-width: 1100px; margin: 0 auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+  nav button { border: 0; background: none; padding: 0; min-height: 56px; color: var(--muted); font: 500 15px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; box-shadow: inset 0 -2px transparent; transition: color .15s, box-shadow .15s; }
+  nav button[aria-pressed="true"] { color: var(--cream); box-shadow: inset 0 -2px var(--red); }
+
+  .titulo { max-width: 1100px; margin: 0 auto; padding: 32px 16px 4px; display: flex; justify-content: space-between; align-items: baseline; }
+  .titulo h2 { font: 700 34px/1 Oswald, sans-serif; text-transform: uppercase; margin: 0; }
+  .titulo span { color: var(--muted); font-size: 13px; }
+
+  main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 10px; padding: 20px 12px 64px; max-width: 1100px; margin: 0 auto; }
+  @media (min-width: 700px) { main { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 40px 20px; padding-inline: 16px; } }
+  article { display: flex; flex-direction: column; gap: 6px; }
+  .img { position: relative; aspect-ratio: 4/5; background: var(--card); border-radius: 4px; overflow: hidden; }
+  .img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity .3s ease-out; }
+  .img img:not([data-l]) { opacity: 0; }
+  .tag { position: absolute; left: 8px; top: 8px; background: var(--cream); color: var(--bg); font: 500 12px Oswald, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+  .tag.red { background: var(--red); color: #fff; }
+  .agotado .img img[data-l] { filter: grayscale(1); opacity: .35; }
+  .agotado .tag { background: var(--line); color: var(--cream); }
+  h3 { font: 500 16px/1.2 Oswald, sans-serif; text-transform: uppercase; letter-spacing: .02em; margin: 6px 0 0; }
+  .precio { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tallas { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tallas input { position: absolute; opacity: 0; pointer-events: none; }
+  .tallas span { display: grid; place-items: center; min-width: 40px; height: 40px; padding: 0 8px; font-size: 13px; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; }
+  .tallas input:checked + span { background: var(--cream); color: var(--bg); border-color: var(--cream); }
+  .tallas input:disabled + span { color: #5c5852; text-decoration: line-through; cursor: not-allowed; }
+  .tallas input:focus-visible + span { outline: 2px solid var(--red); outline-offset: 2px; }
+  .quedan { min-height: 18px; font-size: 12px; color: var(--red); }
+  .add { min-height: 44px; border: 1px solid var(--cream); background: none; border-radius: 4px; font: 500 14px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  .add.ok { background: var(--cream); color: var(--bg); }
+  .avisar { min-height: 44px; display: grid; place-items: center; font-size: 13px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; text-decoration: none; }
+  .estado { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 16px; }
+
+  .pasos { max-width: 1100px; margin: 0 auto; padding: 8px 16px 64px; }
+  .pasos h2 { font: 700 34px/1 Oswald, sans-serif; text-transform: uppercase; margin: 0 0 16px; }
+  .pasos ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (min-width: 700px) { .pasos ol { grid-template-columns: repeat(4, 1fr); } }
+  .pasos li { background: var(--card); border-radius: 8px; padding: 16px; }
+  .pasos b { display: block; color: var(--red); font: 700 28px Oswald, sans-serif; }
+  .pasos strong { display: block; font: 500 18px Oswald, sans-serif; text-transform: uppercase; margin: 4px 0; }
+  .pasos p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  #barra { position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 3; max-width: 520px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--red); color: #fff; border: 0; padding: 14px 18px; border-radius: 4px; font: 500 16px Oswald, sans-serif; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 8px 24px #0008;
+    visibility: hidden; opacity: 0; transition: opacity .2s, visibility 0s .2s, scale .16s var(--ease-out); }
+  #barra.on { visibility: visible; opacity: 1; transition-delay: 0s; }
+  #barra span { display: inline-block; }
+
+  dialog { border: 0; border-radius: 14px 14px 0 0; padding: 20px 16px max(20px, env(safe-area-inset-bottom)); width: 100%; max-width: 520px; max-height: 92svh; margin: auto auto 0; background: var(--card); color: var(--cream); }
+  dialog::backdrop { background: #000a; }
+  dialog, dialog::backdrop { opacity: 0; transition: opacity .2s, overlay .2s allow-discrete, display .2s allow-discrete; }
+  dialog[open], dialog[open]::backdrop { opacity: 1; }
+  @starting-style { dialog[open], dialog[open]::backdrop { opacity: 0; } }
+  dialog h4 { font: 700 26px Oswald, sans-serif; text-transform: uppercase; margin: 0 0 4px; }
+  .paso { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .item img { width: 48px; height: 60px; object-fit: cover; border-radius: 2px; background: var(--line); }
+  .item span { flex: 1; }
+  .item button { border: 0; background: none; min-width: 44px; min-height: 44px; font-size: 20px; color: var(--muted); }
+  .total { display: flex; justify-content: space-between; align-items: baseline; padding: 14px 0; }
+  .total span:last-child { font: 700 28px Oswald, sans-serif; }
+  .btn { width: 100%; min-height: 52px; border: 0; border-radius: 4px; background: var(--cream); color: var(--bg); font: 700 16px Oswald, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+  .btn.wa { background: var(--wa); color: #fff; }
+  .sec { width: 100%; min-height: 44px; margin-top: 4px; border: 0; background: none; color: var(--muted); }
+  .qr { display: grid; place-items: center; gap: 8px; background: var(--cream); color: var(--bg); border-radius: 8px; padding: 18px; margin-bottom: 12px; text-align: center; font-size: 13px; }
+  .qr svg { width: 180px; height: 180px; }
+  .nota { font-size: 13px; color: var(--muted); text-align: center; margin: 10px 0 0; }
+
+  .add, .btn, .sec, nav button, .item button, .tallas span { transition: scale .16s var(--ease-out), background-color .15s, color .15s, border-color .15s; }
+  .add:active, .btn:active, #barra:active { scale: .97; }
+  .tallas label:active span, .item button:active { scale: .92; }
+  @media (prefers-reduced-motion: no-preference) {
+    #barra { translate: 0 calc(100% + 24px); transition-property: opacity, translate, visibility, scale; transition-duration: .2s, .2s, 0s, .16s; }
+    #barra.on { translate: 0; transition-duration: .2s, .42s, 0s, .16s; transition-timing-function: ease, var(--spring), linear, var(--ease-out); }
+    dialog { translate: 0 100%; transition-property: opacity, translate, overlay, display; transition-timing-function: var(--ease-drawer); }
+    dialog[open] { translate: 0; transition-duration: .32s; }
+    @starting-style { dialog[open] { translate: 0 100%; } }
+  }
+
+  footer { border-top: 1px solid var(--line); padding: 48px 16px 140px; color: var(--muted); font-size: 14px; }
+  footer p { max-width: 1100px; margin: 0 auto 12px; }
+  footer a { color: var(--cream); text-underline-offset: 3px; }
+  .pie { font: 700 56px/1 Oswald, sans-serif; color: var(--cream); text-transform: uppercase; }
+</style>
+</head>
+<body>
+<div class="demo">Demo de tienda para SACRED® · fotos y stock de ejemplo</div>
+<header class="hero" id="hero">
+  <div class="hero-txt">
+    <div class="drop" id="drop"></div>
+    <h1 id="nombre"></h1>
+    <p id="lema"></p>
+    <a class="ver" href="#tienda">Ver el drop →</a>
+  </div>
+</header>
+<div class="cinta" aria-hidden="true"><div id="cinta"></div><div id="cinta2"></div></div>
+<div class="titulo" id="tienda"><h2 id="tdrop"></h2><span id="cuenta"></span></div>
+<nav id="filtros" aria-label="Categorías"></nav>
+<main id="catalogo" aria-live="polite"></main>
+<section class="pasos">
+  <h2>Cómo comprar</h2>
+  <ol>
+    <li><b>01</b><strong>Elegí</strong><p>Prenda y talla, con el stock a la vista.</p></li>
+    <li><b>02</b><strong>Armá tu bolsa</strong><p>Sumá todo lo que quieras del drop.</p></li>
+    <li><b>03</b><strong>Pagá con QR</strong><p>Desde la app de tu banco.</p></li>
+    <li><b>04</b><strong>Llega al WhatsApp</strong><p>Tu pedido armado, con el comprobante.</p></li>
+  </ol>
+</section>
+<footer id="pie"></footer>
+
+<button id="barra" type="button" aria-haspopup="dialog"></button>
+<dialog id="bolsa" aria-labelledby="tbolsa">
+  <div id="paso1">
+    <h4 id="tbolsa">Tu bolsa</h4>
+    <p class="paso">Paso 1 de 2 · revisá tu pedido</p>
+    <div id="items"></div>
+    <div class="total"><span>Total</span><span id="total"></span></div>
+    <button class="btn" type="button" id="apagar">Pagar con QR</button>
+  </div>
+  <div id="paso2" hidden>
+    <h4>Pagá con QR</h4>
+    <p class="paso">Paso 2 de 2 · escaneá desde la app de tu banco</p>
+    <div class="qr">
+      <svg viewBox="0 0 21 21" shape-rendering="crispEdges" aria-hidden="true" id="qrsvg"></svg>
+      <div><b id="total2"></b><br>QR de ejemplo · aquí va el QR de SACRED</div>
+    </div>
+    <button class="btn wa" type="button" id="enviar">Ya pagué · enviar pedido</button>
+    <p class="nota">Se abre WhatsApp con tu pedido. Adjuntá la captura del comprobante.</p>
+    <button class="sec" type="button" id="volver">← Volver a la bolsa</button>
+  </div>
+  <button class="sec" type="button" id="cerrar">Seguir viendo</button>
+</dialog>
+
+<script>
+  // Lo único que cambia de una tienda a otra
+  const TIENDA = {
+    nombre: "SACRED",
+    drop: "Drop 03",
+    lema: "Exclusivo. Cada drop a la venta en todo Bolivia, con el pedido directo a WhatsApp.",
+    whatsapp: "12516430051",          // con código de país, ej. 59170000000
+    instagram: "bol.sacred",
+    cinta: ["Envíos a todo Bolivia", "Pago con QR", "Pedido a WhatsApp", "Stock limitado"],
+    hoja: "",                         // enlace CSV publicado de Google Sheets; vacío = productos.csv
+  };
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const wa = txt => `https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(txt)}`;
+  const quieto = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const CAMPOS = ["nombre", "categoria", "precio", "stock", "foto", "nuevo"];
+
+  // ponytail: parser CSV mínimo, suficiente para lo que exporta Google Sheets
+  function parseCSV(text) {
+    const rows = []; let row = [], cell = "", q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) {
+        if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+        else if (c === '"') q = false;
+        else cell += c;
+      } else if (c === '"') q = true;
+      else if (c === ",") { row.push(cell); cell = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(cell); rows.push(row); row = []; cell = "";
+      } else cell += c;
+    }
+    if (cell || row.length) { row.push(cell); rows.push(row); }
+    const [head, ...data] = rows.filter(r => r.some(v => v.trim()));
+    if (!head) return [];
+    const keys = head.map(h => h.normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toLowerCase().split(/[\s(]/)[0]);
+    return data.map(r => {
+      const o = Object.fromEntries(keys.map((k, i) => [k, (r[i] || "").trim()]));
+      for (const k of CAMPOS) o[k] ??= "";
+      return o;
+    });
+  }
+
+  const esNuevo = v => /^\s*(si|sí|s|x|1|yes|nuevo)\b/i.test(v);
+  // "S:3 M:0 L:5" → [{t:"S",n:3}, ...]; una talla sin número cuenta como disponible
+  const leerStock = s => s.split(/[\s,]+/).filter(Boolean).map(x => { const [t, n] = x.split(":"); return { t, n: n === undefined ? 99 : parseInt(n) || 0 }; });
+
+  function limpiar(lista) {
+    return lista.filter(p => p.nombre).map(p => {
+      const cat = p.categoria.trim();
+      const stock = leerStock(p.stock);
+      const hay = stock.reduce((s, x) => s + x.n, 0);
+      return {
+        ...p, stock, hay,
+        categoria: cat ? cat[0].toUpperCase() + cat.slice(1).toLowerCase() : "Otros",
+        precio: p.precio.replace(/^\s*bs\.?\s*/i, ""),
+        foto: /^https?:\/\//i.test(p.foto) ? p.foto : "",
+        ok: hay > 0,
+        nuevo: esNuevo(p.nuevo),
+      };
+    }).sort((a, b) => b.ok - a.ok);
+  }
+
+  function img(foto, i, alt, ancho = 400, sizes = "(min-width:700px) 260px, 50vw") {
+    if (!foto) return "";
+    const u = /images\.unsplash\.com/.test(foto)
+      ? w => foto.replace(/([?&])w=\d+/, "$1w=" + w).replace(/([?&])auto=[^&]*&?/, "$1") + (foto.includes("?") ? "&" : "?") + "auto=format"
+      : () => foto;
+    const carga = i < 2 ? 'fetchpriority="high"' : 'loading="lazy"';
+    return `<img src="${esc(u(ancho))}" srcset="${esc(u(ancho))} ${ancho}w, ${esc(u(ancho * 2))} ${ancho * 2}w"
+      sizes="${sizes}" width="400" height="500" alt="${esc(alt)}" ${carga} decoding="async" onload="this.dataset.l=1" onerror="this.remove()">`;
+  }
+
+  let productos = [], filtro = "Todo", bolsa = [];
+  const enBolsa = (nombre, talla) => bolsa.filter(b => b.nombre === nombre && b.talla === talla).length;
+
+  function pintarTienda() {
+    $("nombre").innerHTML = `${esc(TIENDA.nombre)}<sup>®</sup>`;
+    $("drop").textContent = `${TIENDA.drop} · disponible ahora`;
+    $("lema").textContent = TIENDA.lema;
+    $("tdrop").textContent = TIENDA.drop;
+    const c = TIENDA.cinta.map(t => `<span>${esc(t)}</span><b>✦</b>`).join("");
+    $("cinta").innerHTML = c; $("cinta2").innerHTML = c;
+    $("pie").innerHTML = `<p class="pie">${esc(TIENDA.nombre)}®</p>
+      <p>Envíos a todo Bolivia · Pago con QR</p>
+      <p><a href="https://instagram.com/${esc(TIENDA.instagram)}" target="_blank" rel="noopener">Instagram @${esc(TIENDA.instagram)}</a> · <a href="${wa("Hola SACRED!")}" target="_blank" rel="noopener">WhatsApp</a></p>`;
+  }
+
+  function pintarHero() {
+    const p = productos.find(p => p.nuevo && p.ok && p.foto) || productos.find(p => p.foto);
+    $("hero").querySelector("img")?.remove();
+    if (p) $("hero").insertAdjacentHTML("afterbegin", img(p.foto, 0, "", 900, "100vw").replace(' onload="this.dataset.l=1"', ""));
+  }
+
+  function pintarFiltros() {
+    const cats = ["Todo", ...new Set(productos.map(p => p.categoria))];
+    if (!cats.includes(filtro)) filtro = "Todo";
+    $("filtros").innerHTML = cats.length > 2 ? cats.map(c => `<button type="button" aria-pressed="${c === filtro}">${esc(c)}</button>`).join("") : "";
+    $("filtros").querySelectorAll("button").forEach((b, i, all) => b.onclick = () => {
+      filtro = cats[i];
+      all.forEach(x => x.setAttribute("aria-pressed", x === b));
+      b.scrollIntoView({ inline: "nearest", block: "nearest" });
+      const c = $("catalogo");
+      if (scrollY > c.offsetTop - 72) c.scrollIntoView();
+      pintar();
+      c.animate(quieto() ? [{ opacity: 0 }, { opacity: 1 }] : [{ opacity: 0, translate: "0 6px" }, { opacity: 1, translate: "0" }], { duration: 200, easing: "cubic-bezier(.23,1,.32,1)" });
+    });
+  }
+
+  function pintar() {
+    const lista = productos.map((p, i) => [p, i]).filter(([p]) => filtro === "Todo" || p.categoria === filtro);
+    $("cuenta").textContent = `${productos.filter(p => p.ok).length} prendas disponibles`;
+    $("catalogo").innerHTML = lista.map(([p, i], n) => {
+      const tag = !p.ok ? '<span class="tag">Agotado</span>'
+        : p.hay <= 3 ? '<span class="tag red">Últimas unidades</span>'
+        : p.nuevo ? '<span class="tag">Nuevo</span>' : "";
+      return `
+      <article id="p${i}" class="${p.ok ? "" : "agotado"}">
+        <div class="img">${tag}${img(p.foto, n, p.nombre)}</div>
+        <h3>${esc(p.nombre)}</h3>
+        ${p.precio ? `<div class="precio">Bs ${esc(p.precio)}</div>` : ""}
+        ${p.ok ? `
+          <div class="tallas" role="radiogroup" aria-label="Talla de ${esc(p.nombre)}">${p.stock.map(s =>
+            `<label><input type="radio" name="t${i}" value="${esc(s.t)}" ${s.n > 0 ? "" : "disabled"}><span>${esc(s.t)}</span></label>`).join("")}</div>
+          <div class="quedan" aria-live="polite"></div>
+          <button class="add" type="button" data-i="${i}">Agregar a la bolsa</button>`
+        : `<a class="avisar" href="${wa(`Hola SACRED! ¿Me avisan si vuelve ${p.nombre}?`)}" target="_blank" rel="noopener">Avisame si vuelve</a>`}
+      </article>`;
+    }).join("") || `<p class="estado">No hay prendas en esta categoría.</p>`;
+    $("catalogo").querySelectorAll(".add").forEach(b => b.onclick = () => agregar(b));
+    $("catalogo").querySelectorAll(".tallas input").forEach(r => r.onchange = () => avisoStock(r));
+  }
+
+  function avisoStock(r) {
+    const art = r.closest("article"), p = productos[art.querySelector(".add").dataset.i];
+    const s = p.stock.find(s => s.t === r.value), libre = s.n - enBolsa(p.nombre, s.t);
+    art.querySelector(".quedan").textContent = s.n === 99 ? "" : libre <= 0 ? "Ya tenés todas en tu bolsa" : libre <= 2 ? `¡Quedan ${libre}!` : "";
+  }
+
+  function agregar(b) {
+    const p = productos[b.dataset.i], art = b.closest("article"), sel = art.querySelector("input:checked");
+    clearTimeout(b._t);
+    const aviso = txt => {
+      b.textContent = txt; navigator.vibrate?.([8, 40, 8]);
+      if (!quieto()) art.querySelector(".tallas")?.animate([{ translate: "0" }, { translate: "-4px" }, { translate: "4px" }, { translate: "0" }], { duration: 220, easing: "ease-out" });
+      b._t = setTimeout(() => b.textContent = "Agregar a la bolsa", 1600);
+    };
+    if (!sel) return aviso("Elegí una talla");
+    const s = p.stock.find(s => s.t === sel.value);
+    if (enBolsa(p.nombre, s.t) >= s.n) return aviso("Sin más stock");
+    const yaVisible = $("barra").classList.contains("on");
+    bolsa.push({ nombre: p.nombre, precio: p.precio, talla: s.t, foto: p.foto });
+    navigator.vibrate?.(10);
+    b.textContent = "✓ Agregado"; b.classList.add("ok");
+    b._t = setTimeout(() => { b.textContent = "Agregar a la bolsa"; b.classList.remove("ok"); }, 1400);
+    avisoStock(sel); pintarBolsa();
+    if (yaVisible && !quieto()) $("barra").firstChild.animate([{ transform: "scale(1)" }, { transform: "scale(1.18)" }, { transform: "scale(1)" }], { duration: 260, easing: "cubic-bezier(.23,1,.32,1)" });
+  }
+
+  const num = s => parseFloat(String(s).replace(/\./g, "").replace(",", ".")) || 0;
+  const total = () => bolsa.reduce((s, p) => s + num(p.precio), 0);
+  const bs = n => `Bs ${n.toLocaleString("es-BO")}`;
+
+  function pintarBolsa() {
+    const n = bolsa.length;
+    $("barra").classList.toggle("on", n > 0);
+    $("barra").innerHTML = `<span>Tu bolsa (${n})</span><span>${bs(total())}</span>`;
+    $("items").innerHTML = bolsa.map((p, i) => `<div class="item">${img(p.foto, 9, "", 120, "48px")}
+      <span>${esc(p.nombre)} · ${esc(p.talla)}<br><b>Bs ${esc(p.precio)}</b></span>
+      <button type="button" aria-label="Quitar ${esc(p.nombre)}" data-i="${i}">×</button></div>`).join("");
+    $("items").querySelectorAll("button").forEach(b => b.onclick = () => {
+      navigator.vibrate?.(10); bolsa.splice(b.dataset.i, 1); pintarBolsa();
+      if (!bolsa.length) $("bolsa").close();
+    });
+    $("total").textContent = $("total2").textContent = bs(total());
+  }
+
+  // ponytail: QR decorativo de ejemplo (patrón fijo), en la tienda real va la imagen del QR del banco de SACRED
+  (() => {
+    let r = ""; const m = (x, y) => r += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
+    const ojo = (ox, oy) => { for (let y = 0; y < 7; y++) for (let x = 0; x < 7; x++) if (x % 6 === 0 || y % 6 === 0 || (x > 1 && x < 5 && y > 1 && y < 5)) m(ox + x, oy + y); };
+    ojo(0, 0); ojo(14, 0); ojo(0, 14);
+    for (let y = 0; y < 21; y++) for (let x = 0; x < 21; x++) if (!((x < 8 && y < 8) || (x > 12 && y < 8) || (x < 8 && y > 12)) && ((x * 7 + y * 13 + x * y) % 5 < 2)) m(x, y);
+    $("qrsvg").innerHTML = r;
+  })();
+
+  const paso = n => { $("paso1").hidden = n !== 1; $("paso2").hidden = n !== 2; };
+  $("barra").onclick = () => { paso(1); $("bolsa").showModal(); };
+  $("apagar").onclick = () => paso(2);
+  $("volver").onclick = () => paso(1);
+  $("cerrar").onclick = () => $("bolsa").close();
+  $("bolsa").onclick = e => { if (e.target === $("bolsa")) $("bolsa").close(); };
+  $("enviar").onclick = () => {
+    const lineas = bolsa.map(p => `• ${p.nombre} — talla ${p.talla} — Bs ${p.precio}`).join("\n");
+    window.open(wa(`Hola SACRED! Quiero este pedido del ${TIENDA.drop}:\n${lineas}\nTotal: ${bs(total())}\nYa pagué con QR, te mando el comprobante.`), "_blank", "noopener");
+  };
+
+  async function cargar(url) {
+    const r = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) });
+    if (!r.ok) throw new Error(r.status);
+    const t = await r.text();
+    if (/^\s*</.test(t)) throw new Error("La hoja no está publicada como CSV");
+    const p = limpiar(parseCSV(t));
+    if (!p.length) throw new Error("Hoja vacía");
+    return p;
+  }
+
+  (async () => {
+    pintarTienda();
+    $("catalogo").innerHTML = Array(6).fill('<article><div class="img"></div></article>').join("");
+    try { productos = await cargar(TIENDA.hoja || "productos.csv"); }
+    catch { try { productos = await cargar("productos.csv"); } catch { productos = []; } }
+    pintarHero(); pintarFiltros(); pintar();
+    if (!productos.length) $("catalogo").innerHTML = `<p class="estado">No pudimos cargar el drop. <a href="${wa("Hola SACRED! Quiero ver el drop")}" style="color:var(--red)">Escribinos por WhatsApp</a></p>`;
+  })();
+</script>
+</body>
+</html>
