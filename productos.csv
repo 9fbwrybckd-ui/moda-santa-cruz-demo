@@ -1,0 +1,9 @@
+nombre,categoria,precio,tallas,foto,disponible,nuevo
+Vestido rojo de verano,Vestidos,280,S M L,https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&q=70,si,si
+Vestido floral largo,Vestidos,450,S M,https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=70,si,no
+Abrigo a cuadros,Chaquetas,220,M L,https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=600&q=70,no,no
+Pantalón rosa palazzo,Pantalones,150,S M L XL,https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600&q=70,si,si
+Conjunto deportivo amarillo,Conjuntos,320,S M L,https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=70,si,no
+Chaqueta bomber,Chaquetas,260,M L XL,https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&q=70,si,si
+Look casual urbano,Conjuntos,290,S M,https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=70,si,no
+Abrigo camel,Chaquetas,380,M L,https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=600&q=70,si,no
