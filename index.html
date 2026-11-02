@@ -2,58 +2,126 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Moda Santa Cruz — Catálogo</title>
-<meta name="description" content="Catálogo de ropa en Santa Cruz. Pedí por WhatsApp.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Moda Santa Cruz · Catálogo</title>
+<meta name="description" content="Ropa en Santa Cruz de la Sierra. Elegí tu talla y pedí por WhatsApp. Envíos a toda Bolivia.">
+<meta name="theme-color" content="#faf7f2">
+<meta property="og:title" content="Moda Santa Cruz · Catálogo">
+<meta property="og:description" content="Elegí tu talla y pedí por WhatsApp. Envíos a toda Bolivia.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&w=1200&q=70">
+<meta property="og:url" content="https://9fbwrybckd-ui.github.io/moda-santa-cruz-demo/">
+<link rel="preconnect" href="https://docs.google.com">
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #faf7f2; --ink: #1f1a17; --muted: #7a6f66; --line: #e7dfd4;
-    --card: #fff; --accent: #8a5a3b; --wa: #1f9d55; --off: #b9b0a6;
+    --bg: #faf7f2; --ink: #1f1a17; --muted: #6f655c; --line: #e7dfd4;
+    --accent: #8a5a3b; --wa: #167a42;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 Inter, system-ui, sans-serif; }
-  header { padding: 28px 16px 8px; max-width: 1100px; margin: 0 auto; }
-  h1 { font: 600 clamp(28px, 6vw, 44px)/1.1 Fraunces, serif; margin: 0; letter-spacing: -.01em; }
-  .sub { color: var(--muted); margin: 6px 0 0; }
-  nav { display: flex; gap: 8px; overflow-x: auto; padding: 16px; max-width: 1100px; margin: 0 auto; scrollbar-width: none; }
-  nav button { border: 1px solid var(--line); background: var(--card); color: var(--ink); padding: 8px 16px; border-radius: 999px; font: 500 14px Inter, sans-serif; white-space: nowrap; cursor: pointer; }
+  html { scroll-padding-top: 72px; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 "Instrument Sans", system-ui, sans-serif; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  button { font: inherit; color: inherit; }
+
+  .hero { position: relative; height: 62svh; min-height: 380px; max-height: 640px; background: var(--line); overflow: hidden; }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 45%, #0009); }
+  .hero-txt { position: absolute; left: 16px; right: 16px; bottom: 20px; z-index: 1; color: #fff; max-width: 1100px; margin: 0 auto; }
+  .hero h1 { font: 600 clamp(36px, 9vw, 64px)/1 Fraunces, serif; margin: 0 0 8px; letter-spacing: -.02em; }
+  .hero p { margin: 0; font-size: 15px; opacity: .92; }
+  .ejemplo { position: absolute; top: 12px; right: 12px; z-index: 1; font-size: 11px; color: #fff; background: #0006; padding: 3px 8px; border-radius: 6px; }
+
+  .confianza { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 16px; max-width: 1100px; margin: 0 auto; padding: 16px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--line); }
+  .confianza a { color: var(--ink); }
+  @media (min-width: 700px) { .confianza { grid-template-columns: repeat(4, auto); justify-content: start; gap: 24px; } }
+
+  nav { position: sticky; top: 0; z-index: 2; background: var(--bg); display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; max-width: 1100px; margin: 0 auto; scrollbar-width: none; min-height: 68px; }
+  nav button { border: 1px solid var(--line); background: #fff; padding: 0 16px; min-height: 44px; border-radius: 999px; font-size: 14px; white-space: nowrap; cursor: pointer; }
   nav button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
-  main { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; padding: 0 16px 48px; max-width: 1100px; margin: 0 auto; }
-  @media (min-width: 700px) { main { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 24px; } }
-  article { background: var(--card); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; border: 1px solid var(--line); }
-  .img { position: relative; aspect-ratio: 3/4; background: var(--line); }
+
+  main { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 10px; padding: 8px 12px 120px; max-width: 1100px; margin: 0 auto; }
+  @media (min-width: 700px) { main { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 36px 24px; padding-inline: 16px; } }
+  article { display: flex; flex-direction: column; gap: 6px; }
+  .img { position: relative; aspect-ratio: 3/4; background: var(--line); border-radius: 4px; overflow: hidden; }
   .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .tag { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font: 600 11px Inter; padding: 4px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: .04em; }
-  .agotado .img img { filter: grayscale(1); opacity: .55; }
-  .agotado .tag { background: var(--off); }
-  .info { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  h2 { font: 500 15px/1.3 Inter; margin: 0; }
-  .precio { font: 600 18px Fraunces, serif; }
+  .tag { position: absolute; top: 8px; left: 8px; background: var(--bg); color: var(--ink); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .agotado .img img { filter: grayscale(1); opacity: .5; }
+  h2 { font-size: 14px; font-weight: 400; line-height: 1.3; margin: 4px 0 0; }
+  .precio { font: 600 17px Fraunces, serif; font-variant-numeric: tabular-nums; }
   .tallas { display: flex; gap: 4px; flex-wrap: wrap; }
-  .tallas span { font-size: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 2px 7px; color: var(--muted); }
-  .pedir { margin-top: auto; display: block; text-align: center; background: var(--wa); color: #fff; text-decoration: none; font: 600 14px Inter; padding: 10px; border-radius: 10px; }
-  .agotado .pedir { background: var(--off); pointer-events: none; }
-  .estado { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 0; }
-  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 0 16px 32px; }
+  .tallas label { cursor: pointer; }
+  .tallas input { position: absolute; opacity: 0; pointer-events: none; }
+  .tallas span { display: grid; place-items: center; min-width: 36px; height: 36px; padding: 0 8px; font-size: 13px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+  .tallas input:checked + span { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tallas input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .add { margin-top: 4px; min-height: 44px; border: 1px solid var(--ink); background: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
+  .add.ok { background: var(--ink); color: #fff; }
+  .avisar { margin-top: 4px; min-height: 44px; display: grid; place-items: center; font-size: 13px; color: var(--ink); }
+  .estado { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 40px 16px; }
+  .estado a { color: var(--wa); font-weight: 600; }
+  .sk .img { animation: none; }
+  @media (prefers-reduced-motion: no-preference) { .sk .img { animation: p 1s infinite alternate; } }
+  @keyframes p { to { opacity: .45; } }
+
+  #barra { position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); z-index: 3; max-width: 520px; margin: 0 auto; display: none; justify-content: space-between; align-items: center; gap: 12px; background: var(--wa); color: #fff; border: 0; padding: 14px 18px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; box-shadow: 0 8px 24px #0003; }
+  #barra.on { display: flex; }
+
+  dialog { border: 0; border-radius: 16px 16px 0 0; padding: 20px 16px max(20px, env(safe-area-inset-bottom)); width: 100%; max-width: 520px; margin: auto auto 0; background: var(--bg); color: var(--ink); }
+  dialog::backdrop { background: #0006; }
+  dialog h3 { font: 600 22px Fraunces, serif; margin: 0 0 12px; }
+  .item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .item button { border: 0; background: none; min-width: 44px; min-height: 44px; font-size: 20px; cursor: pointer; color: var(--muted); }
+  .total { display: flex; justify-content: space-between; padding: 14px 0; font-weight: 600; }
+  .enviar { width: 100%; min-height: 50px; border: 0; border-radius: 12px; background: var(--wa); color: #fff; font-weight: 600; font-size: 16px; cursor: pointer; }
+  .cerrar { width: 100%; min-height: 44px; margin-top: 8px; border: 0; background: none; color: var(--muted); cursor: pointer; }
+  footer { text-align: center; color: var(--muted); font-size: 13px; padding: 0 16px 120px; }
 </style>
 </head>
 <body>
-<header>
-  <h1>Moda Santa Cruz</h1>
-  <p class="sub">Ropa para todos los días y para tus noches de gala. Elegí y pedí por WhatsApp.</p>
+<header class="hero" id="hero">
+  <span class="ejemplo">Fotos de ejemplo</span>
+  <div class="hero-txt">
+    <h1 id="nombre"></h1>
+    <p id="lema"></p>
+  </div>
 </header>
+<div class="confianza" id="confianza"></div>
 <nav id="filtros" aria-label="Categorías"></nav>
-<main id="catalogo"><p class="estado">Cargando catálogo…</p></main>
-<footer>Envíos a toda Bolivia · Santa Cruz de la Sierra</footer>
+<main id="catalogo" aria-live="polite"></main>
+<footer id="pie"></footer>
+
+<button id="barra" type="button" aria-haspopup="dialog"></button>
+<dialog id="bolsa" aria-labelledby="tbolsa">
+  <h3 id="tbolsa">Tu pedido</h3>
+  <div id="items"></div>
+  <div class="total"><span>Total</span><span id="total"></span></div>
+  <button class="enviar" type="button" id="enviar">Enviar pedido por WhatsApp</button>
+  <button class="cerrar" type="button" id="cerrar">Seguir viendo</button>
+</dialog>
 
 <script>
-  // El dueño edita esta hoja de Google; la página lee su versión publicada en CSV.
-  const SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVaUS1cnCyNBkceOIoGh_RS53NkUL2BzYqZ8KGrwtG15SBCZ7WOsnFcn8GWIMAHqbL9sNJ7Ghwv5ki/pub?output=csv";
-  const WHATSAPP = "12516430051"; // número con código de país, ej. 59170000000
+  // Lo único que cambia de una tienda a otra
+  const TIENDA = {
+    nombre: "Moda Santa Cruz",
+    lema: "Nueva colección · Santa Cruz de la Sierra",
+    whatsapp: "12516430051",          // con código de país, ej. 59170000000
+    instagram: "modasantacruz",
+    envios: "Envíos a toda Bolivia",
+    delivery: "Delivery en SCZ Bs 15",
+    horario: "Lun–Sáb 9:00–20:00",
+    // El dueño edita esta hoja de Google; la página lee su versión publicada en CSV
+    hoja: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTVaUS1cnCyNBkceOIoGh_RS53NkUL2BzYqZ8KGrwtG15SBCZ7WOsnFcn8GWIMAHqbL9sNJ7Ghwv5ki/pub?output=csv",
+  };
 
-  // ponytail: parser CSV mínimo (comillas y comas), suficiente para lo que exporta Google Sheets
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const wa = txt => `https://wa.me/${TIENDA.whatsapp}?text=${encodeURIComponent(txt)}`;
+  const CAMPOS = ["nombre", "categoria", "precio", "tallas", "foto", "disponible", "nuevo"];
+
+  // ponytail: parser CSV mínimo (comillas, comas y saltos de línea entre comillas), suficiente para lo que exporta Google Sheets
   function parseCSV(text) {
     const rows = []; let row = [], cell = "", q = false;
     for (let i = 0; i < text.length; i++) {
@@ -71,49 +139,153 @@
     }
     if (cell || row.length) { row.push(cell); rows.push(row); }
     const [head, ...data] = rows.filter(r => r.some(v => v.trim()));
-    const keys = head.map(h => h.trim().toLowerCase());
-    return data.map(r => Object.fromEntries(keys.map((k, i) => [k, (r[i] || "").trim()])));
+    if (!head) return [];
+    // "Categoría", "Precio (Bs)", "TALLAS " → categoria, precio, tallas
+    const keys = head.map(h => h.normalize("NFD").replace(/[̀-ͯ]/g, "").trim().toLowerCase().split(/[\s(]/)[0]);
+    return data.map(r => {
+      const o = Object.fromEntries(keys.map((k, i) => [k, (r[i] || "").trim()]));
+      for (const k of CAMPOS) o[k] ??= "";
+      return o;
+    });
   }
 
-  const si = v => /^(si|sí|x|1|true)$/i.test(v);
-  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  let productos = [], filtro = "Todo";
+  // El dueño escribe como quiere: "Sí", "SI ", "no", "agotado", vacío = disponible
+  const disponible = v => !/^\s*(no|n|0|agotado)\b/i.test(v);
+  const esNuevo = v => /^\s*(si|sí|s|x|1|yes|nuevo)\b/i.test(v);
 
-  function pintar() {
-    const lista = productos.filter(p => filtro === "Todo" || p.categoria === filtro);
-    document.getElementById("catalogo").innerHTML = lista.map(p => {
-      const ok = si(p.disponible);
-      const msg = `Hola! Me interesa: ${p.nombre} (Bs ${p.precio}). ¿Qué tallas tienen?`;
-      const tag = !ok ? "Agotado" : si(p.nuevo) ? "Nuevo" : "";
-      return `<article class="${ok ? "" : "agotado"}">
-        <div class="img">${tag ? `<span class="tag">${tag}</span>` : ""}
-          <img src="${esc(p.foto)}" alt="${esc(p.nombre)}" loading="lazy"></div>
-        <div class="info">
-          <h2>${esc(p.nombre)}</h2>
-          <div class="precio">Bs ${esc(p.precio)}</div>
-          <div class="tallas">${p.tallas.split(/[\s,]+/).filter(Boolean).map(t => `<span>${esc(t)}</span>`).join("")}</div>
-          <a class="pedir" target="_blank" rel="noopener" href="https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}">${ok ? "Pedir por WhatsApp" : "Agotado"}</a>
-        </div></article>`;
-    }).join("") || `<p class="estado">No hay productos en esta categoría.</p>`;
+  function limpiar(lista) {
+    return lista.filter(p => p.nombre).map(p => {
+      const cat = p.categoria.trim();
+      return {
+        ...p,
+        categoria: cat ? cat[0].toUpperCase() + cat.slice(1).toLowerCase() : "Otros",
+        precio: p.precio.replace(/^\s*bs\.?\s*/i, ""),
+        tallas: p.tallas.split(/[\s,\/]+/).filter(Boolean),
+        foto: /^https?:\/\//i.test(p.foto) ? p.foto : "",
+        ok: disponible(p.disponible),
+        nuevo: esNuevo(p.nuevo),
+      };
+    }).sort((a, b) => b.ok - a.ok);
+  }
+
+  // Fotos más livianas: AVIF/WebP y tamaño justo para 2 columnas en celular
+  function img(foto, i, alt, ancho = 400) {
+    if (!foto) return "";
+    const u = /images\.unsplash\.com/.test(foto)
+      ? w => foto.replace(/([?&])w=\d+/, "$1w=" + w).replace(/([?&])auto=[^&]*&?/, "$1") + (foto.includes("?") ? "&" : "?") + "auto=format"
+      : () => foto;
+    const carga = i < 2 ? 'fetchpriority="high"' : 'loading="lazy"';
+    return `<img src="${esc(u(ancho))}" srcset="${esc(u(ancho))} ${ancho}w, ${esc(u(ancho * 2))} ${ancho * 2}w"
+      sizes="(min-width:700px) 260px, 50vw" width="300" height="400" alt="${esc(alt)}" ${carga} decoding="async" onerror="this.remove()">`;
+  }
+
+  let productos = [], filtro = "Todo", bolsa = [];
+
+  function pintarTienda() {
+    document.title = `${TIENDA.nombre} · Catálogo`;
+    $("nombre").textContent = TIENDA.nombre;
+    $("lema").textContent = TIENDA.lema;
+    $("confianza").innerHTML = [esc(TIENDA.envios), esc(TIENDA.delivery), esc(TIENDA.horario),
+      `<a href="https://instagram.com/${esc(TIENDA.instagram)}" rel="noopener">@${esc(TIENDA.instagram)}</a>`]
+      .map(t => `<span>${t}</span>`).join("");
+    $("pie").textContent = `${TIENDA.nombre} · ${TIENDA.envios}`;
+  }
+
+  function pintarHero() {
+    const p = productos.find(p => p.nuevo && p.ok && p.foto) || productos.find(p => p.foto);
+    const h = $("hero"); h.querySelector("img")?.remove();
+    if (p) h.insertAdjacentHTML("afterbegin", img(p.foto, 0, "", 900).replace('sizes="(min-width:700px) 260px, 50vw"', 'sizes="100vw"'));
   }
 
   function pintarFiltros() {
-    const cats = ["Todo", ...new Set(productos.map(p => p.categoria).filter(Boolean))];
-    const nav = document.getElementById("filtros");
-    nav.innerHTML = cats.map(c => `<button aria-pressed="${c === filtro}">${esc(c)}</button>`).join("");
-    nav.querySelectorAll("button").forEach((b, i) => b.onclick = () => { filtro = cats[i]; pintarFiltros(); pintar(); });
+    const cats = ["Todo", ...new Set(productos.map(p => p.categoria))];
+    if (!cats.includes(filtro)) filtro = "Todo";
+    $("filtros").innerHTML = cats.length > 2 ? cats.map(c => `<button type="button" aria-pressed="${c === filtro}">${esc(c)}</button>`).join("") : "";
+    $("filtros").querySelectorAll("button").forEach((b, i) => b.onclick = () => { filtro = cats[i]; pintarFiltros(); pintar(); });
   }
+
+  function pintar() {
+    const lista = productos.map((p, i) => [p, i]).filter(([p]) => filtro === "Todo" || p.categoria === filtro);
+    $("catalogo").innerHTML = lista.map(([p, i], n) => `
+      <article class="${p.ok ? "" : "agotado"}">
+        <div class="img">${p.ok ? (p.nuevo ? '<span class="tag">Nuevo</span>' : "") : '<span class="tag">Agotado</span>'}${img(p.foto, n, p.nombre)}</div>
+        <h2>${esc(p.nombre)}</h2>
+        ${p.precio ? `<div class="precio">Bs ${esc(p.precio)}</div>` : ""}
+        ${p.ok ? `
+          ${p.tallas.length ? `<div class="tallas" role="radiogroup" aria-label="Talla de ${esc(p.nombre)}">${p.tallas.map(t =>
+            `<label><input type="radio" name="t${i}" value="${esc(t)}"><span>${esc(t)}</span></label>`).join("")}</div>` : ""}
+          <button class="add" type="button" data-i="${i}">Agregar a la bolsa</button>`
+        : `<a class="avisar" href="${wa(`Hola! ¿Me avisan cuando vuelva ${p.nombre}?`)}" target="_blank" rel="noopener">Avisame cuando vuelva</a>`}
+      </article>`).join("") || `<p class="estado">No hay productos en esta categoría.</p>`;
+    $("catalogo").querySelectorAll(".add").forEach(b => b.onclick = () => agregar(b));
+  }
+
+  function agregar(b) {
+    const p = productos[b.dataset.i];
+    const sel = b.closest("article").querySelector("input:checked");
+    if (p.tallas.length && !sel) {
+      b.textContent = "Elegí una talla";
+      b.closest("article").querySelector(".tallas input")?.focus();
+      setTimeout(() => b.textContent = "Agregar a la bolsa", 1600);
+      return;
+    }
+    bolsa.push({ nombre: p.nombre, precio: p.precio, talla: sel?.value || "" });
+    b.textContent = "✓ Agregado"; b.classList.add("ok");
+    setTimeout(() => { b.textContent = "Agregar a la bolsa"; b.classList.remove("ok"); }, 1400);
+    pintarBolsa();
+  }
+
+  const num = s => parseFloat(String(s).replace(/\./g, "").replace(",", ".")) || 0;
+  const total = () => bolsa.reduce((s, p) => s + num(p.precio), 0);
+
+  function pintarBolsa() {
+    const n = bolsa.length, t = total();
+    $("barra").classList.toggle("on", n > 0);
+    $("barra").innerHTML = `<span>Ver pedido (${n})</span><span>Bs ${t.toLocaleString("es-BO")}</span>`;
+    $("items").innerHTML = bolsa.map((p, i) => `<div class="item"><span>${esc(p.nombre)}${p.talla ? ` · talla ${esc(p.talla)}` : ""}<br><b>Bs ${esc(p.precio)}</b></span>
+      <button type="button" aria-label="Quitar ${esc(p.nombre)}" data-i="${i}">×</button></div>`).join("");
+    $("items").querySelectorAll("button").forEach(b => b.onclick = () => { bolsa.splice(b.dataset.i, 1); pintarBolsa(); if (!bolsa.length) $("bolsa").close(); });
+    $("total").textContent = `Bs ${t.toLocaleString("es-BO")}`;
+  }
+
+  $("barra").onclick = () => $("bolsa").showModal();
+  $("cerrar").onclick = () => $("bolsa").close();
+  $("bolsa").onclick = e => { if (e.target === $("bolsa")) $("bolsa").close(); };
+  $("enviar").onclick = () => {
+    const lineas = bolsa.map(p => `• ${p.nombre}${p.talla ? ` — talla ${p.talla}` : ""} — Bs ${p.precio}`).join("\n");
+    window.open(wa(`Hola! Quiero hacer este pedido:\n${lineas}\nTotal: Bs ${total().toLocaleString("es-BO")}`), "_blank", "noopener");
+  };
 
   async function cargar(url) {
-    const r = await fetch(url, { cache: "no-store" });
+    const r = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) });
     if (!r.ok) throw new Error(r.status);
-    return parseCSV(await r.text()).filter(p => p.nombre);
+    const t = await r.text();
+    if (/^\s*</.test(t)) throw new Error("La hoja no está publicada como CSV");
+    const p = limpiar(parseCSV(t));
+    if (!p.length) throw new Error("Hoja vacía");
+    return [p, t];
   }
 
+  function mostrar(lista) { productos = lista; pintarHero(); pintarFiltros(); pintar(); }
+
   (async () => {
-    try { productos = SHEET_CSV ? await cargar(SHEET_CSV) : await cargar("productos.csv"); }
-    catch { productos = await cargar("productos.csv").catch(() => []); }
-    pintarFiltros(); pintar();
+    pintarTienda();
+    // Visitas repetidas: muestra al instante la última copia buena y después actualiza
+    let guardado; try { guardado = localStorage.getItem("catalogo"); } catch {}
+    if (guardado) mostrar(limpiar(parseCSV(guardado)));
+    else $("catalogo").innerHTML = Array(6).fill('<article class="sk"><div class="img"></div></article>').join("");
+    try {
+      const [p, t] = await cargar(TIENDA.hoja);
+      try { localStorage.setItem("catalogo", t); } catch {}
+      mostrar(p);
+    } catch {
+      if (guardado) return;
+      try { mostrar((await cargar("productos.csv"))[0]); }
+      catch {
+        $("filtros").innerHTML = "";
+        $("catalogo").innerHTML = `<p class="estado">No pudimos cargar el catálogo.<br><a href="${wa("Hola! Quiero ver el catálogo")}" target="_blank" rel="noopener">Escribinos por WhatsApp</a></p>`;
+      }
+    }
   })();
 </script>
 </body>
